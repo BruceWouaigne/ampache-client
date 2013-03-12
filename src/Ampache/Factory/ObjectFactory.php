@@ -17,11 +17,15 @@ class ObjectFactory
 
         foreach ($xml->children() as $key => $element) {
             $factory = $this->getFactory($key);
-            $datas[] = $factory->createSingleObject($key, $element);
+            $datas[] = $factory->hydrateObject($element);
         }
 
         if (count($datas) === 1) {
             return $datas[0];
+        }
+
+        if (count($datas) === 0) {
+            return null;
         }
 
         return $datas;
@@ -29,7 +33,8 @@ class ObjectFactory
 
     private function getFactory($xmlObjectName)
     {
-        $className = sprintf('\Ampache\Factory\%s', ucFirst($xmlObjectName));
+        $className = sprintf('\Ampache\Factory\%sFactory', ucFirst($xmlObjectName));
+
         if (true === class_exists($className)) {
             return new $className;
         } else {

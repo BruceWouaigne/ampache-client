@@ -2,7 +2,7 @@
 
 namespace Ampache\Model;
 
-class LightTag
+class LightAlbum
 {
     protected $id;
     protected $name;

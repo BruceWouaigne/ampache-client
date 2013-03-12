@@ -2,9 +2,9 @@
 
 namespace Ampache\Factory;
 
-class ArtistFactory extends ObjectFactory
+class ArtistFactory implements FactoryInterface
 {
-    private function createSingleObject(\SimpleXmlElement $xml) {
+    public function hydrateObject(\SimpleXmlElement $xml) {
          if (true === empty($xml['id'])) {
             return null;
         }
@@ -20,9 +20,10 @@ class ArtistFactory extends ObjectFactory
         $tags = array();
 
         foreach ($xml->tag as $element) {
-            $tag = new \Ampache\Model\LightTag;
-            $tag->setId((int) $element['id']);
-            $tag->setName((string) $element);
+            $tag = new \Ampache\Model\LightTag(
+                (int) $element['id'],
+                (string) $element
+            );
             $tags[] = $tag;
         }
 

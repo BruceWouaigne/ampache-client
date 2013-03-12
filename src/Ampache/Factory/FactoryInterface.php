@@ -1,6 +1,8 @@
 <?php
 
+namespace Ampache\Factory;
+
 interface FactoryInterface
 {
-    public function createSingleObject(\SimpleXmlElement $xml);
+    public function hydrateObject(\SimpleXmlElement $xml);
 }
