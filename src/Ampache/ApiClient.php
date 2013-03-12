@@ -25,9 +25,12 @@ class ApiClient
         }
 
         $params['action'] = $action;
-        $result           = $this->processRequest($params);
+        $xml              = $this->processRequest($params);
 
-        return $result;
+        $factory = new Factory\ObjectFactory;
+        $datas = $factory->build($xml);
+
+        return $datas;
     }
 
     public function reconnect() {
