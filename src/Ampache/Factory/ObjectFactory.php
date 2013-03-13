@@ -4,7 +4,7 @@ namespace Ampache\Factory;
 
 class ObjectFactory
 {
-    public function build($xml)
+    public function build($action, $xml)
     {
         $datas = array();
 
@@ -20,15 +20,20 @@ class ObjectFactory
             $datas[] = $factory->hydrateObject($element);
         }
 
-        if (count($datas) === 1) {
-            return $datas[0];
+        $resultCount = count($datas);
+
+        if ($resultCount > 0) {
+            if ($resultCount === 1) {
+                if (true === $this->isPluralAction($action)) {
+                    return $datas;
+                } else {
+                    return $datas[0];
+                }
+            }
+            return $datas;
         }
 
-        if (count($datas) === 0) {
-            return null;
-        }
-
-        return $datas;
+        return null;
     }
 
     private function getFactory($xmlObjectName)
@@ -39,6 +44,15 @@ class ObjectFactory
             return new $className;
         } else {
             throw new \Exception(sprintf('Factory \'%s\' does not exists', $className));
+        }
+    }
+
+    private function isPluralAction($action)
+    {
+        if (substr($action, -1) === 's') {
+            return true;
+        } else {
+            return false;
         }
     }
 }

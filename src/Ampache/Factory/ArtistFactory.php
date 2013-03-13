@@ -5,7 +5,7 @@ namespace Ampache\Factory;
 class ArtistFactory implements FactoryInterface
 {
     public function hydrateObject(\SimpleXmlElement $xml) {
-         if (true === empty($xml['id'])) {
+        if (true === empty($xml['id'])) {
             return null;
         }
 

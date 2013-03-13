@@ -28,7 +28,7 @@ class ApiClient
         $xml              = $this->processRequest($params);
 
         $factory = new Factory\ObjectFactory;
-        $datas = $factory->build($xml);
+        $datas = $factory->build($action, $xml);
 
         return $datas;
     }
