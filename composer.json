@@ -11,8 +11,15 @@
     "autoload": {
         "psr-0": {"Ampache": "src/"}
     },
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.3.2",
         "ext-http": "*"
+    },
+    "require-dev": {
+        "phpspec/phpspec2": "dev-master"
+    },
+    "config": {
+        "bin-dir": "bin"
     }
 }

@@ -4,16 +4,9 @@ namespace Ampache\Factory;
 
 class ObjectFactory
 {
-    public function build($action, $xml)
+    public function build($action, \SimpleXmlElement $xml)
     {
         $datas = array();
-
-        if (false === $xml instanceOf \SimpleXmlElement) {
-            throw new \InvalidArgumentException(sprintf('Expected parameter type %s got %s',
-                'SimpleXmlElement',
-                (is_object($xml) ? get_class($xml) : 'non object')
-            ));
-        }
 
         foreach ($xml->children() as $key => $element) {
             $factory = $this->getFactory($key);
@@ -24,9 +17,7 @@ class ObjectFactory
 
         if ($resultCount > 0) {
             if ($resultCount === 1) {
-                if (true === $this->isPluralAction($action)) {
-                    return $datas;
-                } else {
+                if (false === $this->isPluralAction($action)) {
                     return $datas[0];
                 }
             }

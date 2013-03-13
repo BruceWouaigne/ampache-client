@@ -4,18 +4,29 @@ namespace Ampache;
 
 class ApiClient
 {
-    private $baseUrl;
-    private $login;
-    private $password;
-    private $authenticationToken;
+    protected $requestFactory;
+    protected $requestTransporter;
+    protected $xmlParser;
+    protected $objectFactory;
+    protected $authenticationToken;
 
-    public function __construct($baseUrl, $login, $password)
+    public function __construct($baseUrl)
     {
-        $this->baseUrl  = sprintf('%s/server/xml.server.php?', rtrim($baseUrl, '/'));
-        $this->login    = $login;
-        $this->password = $password;
+        $this->requestTransporter  = new Request\RequestTransporter;
+        $this->xmlParser           = new Xml\Parser;
+        $this->objectFactory       = new Factory\ObjectFactory;
+        $this->requestFactory      = new Request\RequestFactory(sprintf(
+            '%s/server/xml.server.php?',
+            rtrim($baseUrl, '/')
+        ));
+    }
 
-        $this->setAuthenticationToken();
+    public function processLogin($login, $password)
+    {
+        $this->authenticationToken = $this->retrieveAuthenticationToken(
+            $login,
+            $password
+        );
     }
 
     public function request($action, array $params = array())
@@ -25,70 +36,63 @@ class ApiClient
         }
 
         $params['action'] = $action;
-        $xml              = $this->processRequest($params);
+        $params['auth']   = $this->authenticationToken;
 
-        $factory = new Factory\ObjectFactory;
-        $datas = $factory->build($action, $xml);
+        $request = $this->requestFactory->buildGetRequest($params);
+        $datas   = $this->requestTransporter->sendRequest($request);
+        $xml     = $this->xmlParser->parse($datas);
+        $object  = $this->objectFactory->build($action, $xml);
 
-        return $datas;
+        return $object;
     }
 
-    public function reconnect() {
-        $this->setAuthenticationToken();
+    public function setRequestTransporter($requestTransporter)
+    {
+        $this->requestTransporter = $requestTransporter;
     }
 
-    private function setAuthenticationToken()
+    public function setXmlParser($xmlParser)
+    {
+        $this->xmlParser = $xmlParser;
+    }
+
+    public function setObjectFactory($objectFactory)
+    {
+        $this->objectFactory = $objectFactory;
+    }
+
+    public function setRequestFactory($requestFactory)
+    {
+        $this->requestFactory = $requestFactory;
+    }
+
+    public function getAuthenticationToken()
+    {
+        return $this->authenticationToken;
+    }
+
+    private function retrieveAuthenticationToken($login, $password)
     {
         $time       = time();
-        $key        = hash('sha256', $this->password);
+        $key        = hash('sha256', $password);
         $passphrase = hash('sha256', $time . $key);
 
-        $datas = $this->processRequest(array(
+        $params = array(
             'action'    => 'handshake',
             'auth'      => $passphrase,
             'timestamp' => $time,
             'version'   => '350001',
-            'user'      => $this->login
-        ), false);
+            'user'      => $login
+        );
 
-        if (false === isset($datas->auth)) {
+        $request = $this->requestFactory->buildGetRequest($params);
+        $datas   = $this->requestTransporter->sendRequest($request);
+        $xml     = $this->xmlParser->parse($datas);
+
+        if (false === isset($xml->auth)) {
             throw new Exception\AmpacheAuthenticationException('Authentication failure.');
         }
 
-        $this->authenticationToken = (string) $datas->auth;
-    }
-
-    private function processRequest(array $params, $protected = true)
-    {
-        if (true === $protected) {
-            $params['auth'] = $this->authenticationToken;
-        }
-
-        $url     = $this->baseUrl . http_build_query($params);
-        $request = new \HttpRequest($url);
-
-        $request->send();
-
-        switch ($request->getResponseCode()) {
-        case 200:
-            try {
-                $xml = new \SimpleXmlElement($request->getResponseBody());
-            } catch (\Exception $ex) {
-                $xml = new \SimpleXmlElement('<root></root>');
-            }
-            if (true === isset($xml->error)) {
-                throw new Exception\AmpacheException(sprintf('Ampache error code %s: %s.',
-                    $xml->error['code'],
-                    (string) $xml->error
-                ));
-            }
-            return $xml;
-        case 404:
-            throw new \Exception('Ampache server not found (404). You should check the base url.');
-        default:
-            throw new \Exception(sprintf('HTTP response code %d unsupported.',
-                $request->getResponseCode()
-            ));
-        }
+        return (string) $xml->auth;
     }
 }
