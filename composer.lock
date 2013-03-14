@@ -1,28 +1,28 @@
 {
-    "hash": "29a18988cefb48672e9bc1e81907b858",
+    "hash": "24cce1e7db818bba88b273f67add22c9",
     "packages": [
 
     ],
     "packages-dev": [
         {
             "name": "mockery/mockery",
-            "version": "0.7.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "git://github.com/padraic/mockery.git",
-                "reference": "0.7.2"
+                "url": "https://github.com/padraic/mockery.git",
+                "reference": "1174be6aed7b3c1e048834f14902ce796b6483c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/padraic/mockery/zipball/0.7.2",
-                "reference": "0.7.2",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/1174be6aed7b3c1e048834f14902ce796b6483c2",
+                "reference": "1174be6aed7b3c1e048834f14902ce796b6483c2",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.2"
             },
-            "suggest": {
-                "Hamcrest": "1.0.0"
+            "require-dev": {
+                "hamcrest/hamcrest": "1.1.0"
             },
             "type": "library",
             "autoload": {
@@ -32,7 +32,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "New BSD"
+                "BSD-3-Clause"
             ],
             "authors": [
                 {
@@ -55,7 +55,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2012-01-24 12:22:39"
+            "time": "2013-03-11 13:49:28"
         },
         {
             "name": "phpspec/php-diff",
@@ -92,30 +92,36 @@
         },
         {
             "name": "phpspec/phpspec2",
-            "version": "dev-master",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpspec/phpspec2.git",
-                "reference": "c6140c098d79a4ed10eba2411817a32f72d4a367"
+                "reference": "8e841da15e21121c4c96ef81ec1975ef984b813f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpspec/phpspec2/zipball/c6140c098d79a4ed10eba2411817a32f72d4a367",
-                "reference": "c6140c098d79a4ed10eba2411817a32f72d4a367",
+                "url": "https://api.github.com/repos/phpspec/phpspec2/zipball/8e841da15e21121c4c96ef81ec1975ef984b813f",
+                "reference": "8e841da15e21121c4c96ef81ec1975ef984b813f",
                 "shasum": ""
             },
             "require": {
                 "mockery/mockery": "0.7.*",
-                "php": ">=5.3.1",
+                "php": ">=5.3.3",
                 "phpspec/php-diff": "*@dev",
-                "symfony/console": ">=2.1.0,<2.2.0",
-                "symfony/event-dispatcher": ">=2.1.0,<2.2.0",
-                "symfony/finder": ">=2.1.0,<2.2.0"
+                "symfony/console": ">=2.1, <2.3-dev",
+                "symfony/event-dispatcher": ">=2.1, <2.3-dev",
+                "symfony/finder": ">=2.1, <2.3-dev",
+                "symfony/yaml": ">=2.1, <2.3-dev"
             },
             "bin": [
                 "bin/phpspec"
             ],
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-develop": "1.0.x-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
                     "PHPSpec2": "src/"
@@ -136,39 +142,46 @@
                     "homepage": "http://marcelloduarte.net/"
                 }
             ],
-            "description": "Specification-oriented BDD framework for PHP 5.4",
+            "description": "Specification-oriented BDD framework for PHP 5.3+",
             "homepage": "http://phpspec.net/",
             "keywords": [
                 "BDD",
                 "SpecBDD",
                 "TDD",
                 "spec",
-                "specification"
+                "specification",
+                "testing",
+                "tests"
             ],
-            "time": "2013-02-08 11:00:28"
+            "time": "2013-03-13 16:01:59"
         },
         {
             "name": "symfony/console",
-            "version": "2.1.x-dev",
+            "version": "v2.2.0",
             "target-dir": "Symfony/Component/Console",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Console.git",
-                "reference": "256b00333ab08ce1f6264152b22e08e4138275eb"
+                "reference": "v2.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/256b00333ab08ce1f6264152b22e08e4138275eb",
-                "reference": "256b00333ab08ce1f6264152b22e08e4138275eb",
+                "url": "https://api.github.com/repos/symfony/Console/zipball/v2.2.0",
+                "reference": "v2.2.0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
-                    "Symfony\\Component\\Console": ""
+                    "Symfony\\Component\\Console\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -187,37 +200,42 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "http://symfony.com",
-            "time": "2013-03-01 16:50:10"
+            "time": "2013-03-01 06:43:14"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "2.1.x-dev",
+            "version": "v2.2.0",
             "target-dir": "Symfony/Component/EventDispatcher",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "v2.1.8"
+                "reference": "v2.2.0-RC3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.1.8",
-                "reference": "v2.1.8",
+                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/v2.2.0-RC3",
+                "reference": "v2.2.0-RC3",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "symfony/dependency-injection": "2.1.*"
+                "symfony/dependency-injection": ">=2.0,<3.0"
             },
             "suggest": {
-                "symfony/dependency-injection": "2.1.*",
-                "symfony/http-kernel": "2.1.*"
+                "symfony/dependency-injection": "2.2.*",
+                "symfony/http-kernel": "2.2.*"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
-                    "Symfony\\Component\\EventDispatcher": ""
+                    "Symfony\\Component\\EventDispatcher\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -236,30 +254,35 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "http://symfony.com",
-            "time": "2013-02-11 11:26:14"
+            "time": "2013-02-11 11:26:43"
         },
         {
             "name": "symfony/finder",
-            "version": "2.1.x-dev",
+            "version": "v2.2.0",
             "target-dir": "Symfony/Component/Finder",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Finder.git",
-                "reference": "69858f868c0caabe3d859c448f98d249541c0489"
+                "reference": "v2.2.0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/69858f868c0caabe3d859c448f98d249541c0489",
-                "reference": "69858f868c0caabe3d859c448f98d249541c0489",
+                "url": "https://api.github.com/repos/symfony/Finder/zipball/v2.2.0",
+                "reference": "v2.2.0",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
             "autoload": {
                 "psr-0": {
-                    "Symfony\\Component\\Finder": ""
+                    "Symfony\\Component\\Finder\\": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -278,18 +301,72 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "http://symfony.com",
-            "time": "2013-03-06 19:26:55"
+            "time": "2013-02-28 14:06:36"
+        },
+        {
+            "name": "symfony/yaml",
+            "version": "v2.2.0",
+            "target-dir": "Symfony/Component/Yaml",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/Yaml.git",
+                "reference": "v2.2.0-RC3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/v2.2.0-RC3",
+                "reference": "v2.2.0-RC3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\Yaml\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Yaml Component",
+            "homepage": "http://symfony.com",
+            "time": "2013-01-27 16:49:19"
         }
     ],
     "aliases": [
-
+        {
+            "alias": "0.7.2",
+            "alias_normalized": "0.7.2.0",
+            "version": "9999999-dev",
+            "package": "mockery/mockery"
+        }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "stability-flags": {
-        "phpspec/phpspec2": 20
+        "mockery/mockery": 20,
+        "phpspec/phpspec2": 20,
+        "phpspec/php-diff": 20
     },
     "platform": {
-        "php": ">=5.3.2",
+        "php": ">=5.3.3",
         "ext-http": "*"
     },
     "platform-dev": [

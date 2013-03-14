@@ -11,13 +11,15 @@
     "autoload": {
         "psr-0": {"Ampache": "src/"}
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
         "php": ">=5.3.3",
         "ext-http": "*"
     },
     "require-dev": {
-        "phpspec/phpspec2": "dev-master"
+        "mockery/mockery": "dev-master as 0.7.2",
+        "phpspec/phpspec2": "dev-develop",
+        "phpspec/php-diff": "*@dev"
     },
     "config": {
         "bin-dir": "bin"
