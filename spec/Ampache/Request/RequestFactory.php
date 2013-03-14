@@ -11,11 +11,6 @@ class RequestFactory extends ObjectBehavior
         $this->beConstructedWith('http://localhost/');
     }
 
-    function it_should_be_initializable()
-    {
-        $this->shouldHaveType('Ampache\Request\RequestFactory');
-    }
-
     function its_buildGetRequest_should_return_an_httpRequest_based_on_given_parameters()
     {
         $params = array('auth' => '1234');

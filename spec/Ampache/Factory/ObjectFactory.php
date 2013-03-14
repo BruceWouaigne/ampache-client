@@ -6,11 +6,6 @@ use PHPSpec2\ObjectBehavior;
 
 class ObjectFactory extends ObjectBehavior
 {
-    function it_should_be_initializable()
-    {
-        $this->shouldHaveType('Ampache\Factory\ObjectFactory');
-    }
-
     function its_build_should_throw_an_exception_if_factory_does_not_exists()
     {
         $xml = new \SimpleXmlElement('<root><fake></fake></root>');

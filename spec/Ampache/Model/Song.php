@@ -6,11 +6,6 @@ use PHPSpec2\ObjectBehavior;
 
 class Song extends ObjectBehavior
 {
-    function it_should_be_initializable()
-    {
-        $this->shouldHaveType('Ampache\Model\Song');
-    }
-
     function it_should_have_an_id_mutator()
     {
         $this->setId(1);

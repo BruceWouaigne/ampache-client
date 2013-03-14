@@ -6,11 +6,6 @@ use PHPSpec2\ObjectBehavior;
 
 class ArtistFactory extends ObjectBehavior
 {
-    function it_should_be_initializable()
-    {
-        $this->shouldHaveType('Ampache\Factory\ArtistFactory');
-    }
-
     function its_hydrateObject_should_return_null_when_id_is_empty()
     {
         $xml = new \SimpleXmlElement('<root id=""></root>');

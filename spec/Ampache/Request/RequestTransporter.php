@@ -6,11 +6,6 @@ use PHPSpec2\ObjectBehavior;
 
 class RequestTransporter extends ObjectBehavior
 {
-    function it_should_be_initializable()
-    {
-        $this->shouldHaveType('Ampache\Request\RequestTransporter');
-    }
-
     /**
      * @param HttpRequest $request
      * @param stdClass    $message

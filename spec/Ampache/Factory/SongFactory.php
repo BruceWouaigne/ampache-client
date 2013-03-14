@@ -6,11 +6,6 @@ use PHPSpec2\ObjectBehavior;
 
 class SongFactory extends ObjectBehavior
 {
-    function it_should_be_initializable()
-    {
-        $this->shouldHaveType('Ampache\Factory\SongFactory');
-    }
-
     function its_hydrateObject_should_return_null_when_time_is_empty()
     {
         $xml = new \SimpleXmlElement('<root time=""></root>');

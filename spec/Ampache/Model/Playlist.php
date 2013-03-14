@@ -6,11 +6,6 @@ use PHPSpec2\ObjectBehavior;
 
 class Playlist extends ObjectBehavior
 {
-    function it_should_be_initializable()
-    {
-        $this->shouldHaveType('Ampache\Model\Playlist');
-    }
-
     function it_should_have_an_id_mutator()
     {
         $this->setId(1);

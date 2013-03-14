@@ -11,11 +11,6 @@ class LightArtist extends ObjectBehavior
         $this->beConstructedWith(ANY_ARGUMENT, ANY_ARGUMENT);
     }
 
-    function it_should_be_initializable()
-    {
-        $this->shouldHaveType('Ampache\Model\LightArtist');
-    }
-
     function it_should_have_an_id_mutator()
     {
         $this->setId(1);
