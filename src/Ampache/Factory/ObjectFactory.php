@@ -10,7 +10,11 @@ class ObjectFactory
 
         foreach ($xml->children() as $key => $element) {
             $factory = $this->getFactory($key);
-            $datas[] = $factory->hydrateObject($element);
+            $object  = $factory->hydrateObject($element);
+
+            if (null !== $object) {
+                $datas[] = $object;
+            }
         }
 
         $resultCount = count($datas);
