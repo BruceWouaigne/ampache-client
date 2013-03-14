@@ -10,6 +10,11 @@ class ObjectFactory
 
         foreach ($xml->children() as $key => $element) {
             $factory = $this->getFactory($key);
+
+            if (false === $factory) {
+                return $xml;
+            }
+
             $object  = $factory->hydrateObject($element);
 
             if (null !== $object) {
@@ -38,7 +43,7 @@ class ObjectFactory
         if (true === class_exists($className)) {
             return new $className;
         } else {
-            throw new \Exception(sprintf('Factory \'%s\' does not exists', $className));
+            return false;
         }
     }
 
